@@ -13,5 +13,16 @@ file(GLOB_RECURSE MTT_SOURCES CONFIGURE_DEPENDS
     ./src/**.h)
 
 add_executable(${CMAKE_PROJECT_NAME} ${MTT_SOURCES})
-target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE glfw ${GLFW_LIBRARIES})
-target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ./ThirdParty/metal-cpp)
+add_library(metallib ./metallib/Metal.cpp)
+
+target_include_directories(metallib PUBLIC ./ThirdParty/metal-cpp)
+target_link_libraries(metallib
+        PRIVATE
+        "-framework Metal"
+        "-framework MetalKit"
+        "-framework AppKit"
+        "-framework Foundation"
+        "-framework QuartzCore"
+)
+
+target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE metallib)

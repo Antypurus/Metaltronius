@@ -4,6 +4,7 @@
 
 int main()
 {
-    std::cout << "Hello world" << std::endl;
+    MTL::Device* device = MTL::CreateSystemDefaultDevice();
+    std::cout << device << std::endl;
     return 0;
 }
