@@ -1,0 +1,17 @@
+cmake_minimum_required(VERSION 3.10)
+project(Metaltronius)
+
+set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_COLOR_DIAGNOSTICS ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+add_subdirectory(ThirdParty/GLFW)
+
+file(GLOB_RECURSE MTT_SOURCES CONFIGURE_DEPENDS
+    ./src/**.cpp
+    ./src/**.h)
+
+add_executable(${CMAKE_PROJECT_NAME} ${MTT_SOURCES})
+target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE glfw ${GLFW_LIBRARIES})
+target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ./ThirdParty/metal-cpp)
